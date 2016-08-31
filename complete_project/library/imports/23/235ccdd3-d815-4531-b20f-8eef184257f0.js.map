@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "sources": [
+    "unknown"
+  ],
+  "names": [],
+  "mappings": "AAAA,EAAE,CAAC,KAAK,CAAC;AACL,eAAS,EAAE,CAAC,SAAS;;AAErB,cAAU,EAAE;;AAER,kBAAU,EAAE,CAAC;KAChB;;AAED,UAAM,EAAE,kBAAY,EAEnB;;;AAGD,qBAAiB,EAAG,6BAAU;AAC3B,YAAI,aAAa,GAAG,IAAI,CAAC,IAAI,CAAC,MAAM,CAAC,WAAW,EAAE,CAAC;;;AAGnD,YAAI,QAAQ,GAAG,EAAE,CAAC,SAAS,CAAE,IAAI,CAAC,IAAI,CAAC,QAAQ,EAAE,aAAa,CAAC,CAAC;AAChE,eAAO,QAAQ,CAAC;KAClB;;AAED,YAAQ,EAAG,oBAAU;;AAEjB,YAAI,CAAC,IAAI,CAAC,YAAY,EAAE,CAAC;;AAEzB,YAAI,CAAC,IAAI,CAAC,SAAS,EAAE,CAAC;;AAEtB,YAAI,CAAC,IAAI,CAAC,OAAO,EAAE,CAAC;KACvB;;AAEA,UAAM,EAAE,gBAAU,EAAE,EAAE;AAChB,YAAG,IAAI,CAAC,iBAAiB,EAAE,GAAG,IAAI,CAAC,UAAU,EAAC;AAC9C,gBAAI,CAAC,QAAQ,EAAE,CAAC;AAChB,mBAAO;SACR;KACL;CACJ,CAAC,CAAC",
+  "file": "unknown",
+  "sourcesContent": [
+    "cc.Class({\n    extends: cc.Component,\n\n    properties: {\n        //player 和 star 完成触碰事件的最小距离\n        pickRadius: 0\n    },\n\n    onLoad: function () {\n      \n    },\n\n    //获取从game实例中传回的玩家距离\n    getPlayerDistance : function(){\n       var playerPsition = this.game.player.getPosition();\n\n       //var playerPsition = this.game.player.getPosition();\n       var distance = cc.pDistance( this.node.position, playerPsition);\n       return distance;\n    },\n    //碰撞逻辑\n    onPicked : function(){\n        // 当星星呗收集时，调用game脚本中的接口，生成一个新的星星\n        this.game.spawnNewStar();\n        //加分\n        this.game.gainScore();\n        //销毁当前的星星\n        this.node.destroy();\n    },\n    //每帧判断距离，小于pickRadius 就执行收集行为\n     update: function (dt) {\n           if(this.getPlayerDistance() < this.pickRadius){\n           this.onPicked();\n           return;\n         }\n    }\n});\n"
+  ]
+}

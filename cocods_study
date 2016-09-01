@@ -1,0 +1,10 @@
+  //创建精灵
+var role = new cc.Sprite('role.png’);
+	//添加到场景中
+scene.addChild(role);
+	//设置初始位置
+role.setPosition(100, 100);
+	//定义动作
+var walk = cc.sequence(cc.moveBy(5, 100, 0), cc.moveBy(5, -100, 0)).repeatForever();
+	//角色的跑步动作
+role.runAction(walk);

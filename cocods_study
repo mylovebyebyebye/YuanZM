@@ -1,10 +1,28 @@
-  //创建精灵
-var role = new cc.Sprite('role.png’);
-	//添加到场景中
-scene.addChild(role);
-	//设置初始位置
-role.setPosition(100, 100);
-	//定义动作
-var walk = cc.sequence(cc.moveBy(5, 100, 0), cc.moveBy(5, -100, 0)).repeatForever();
-	//角色的跑步动作
-role.runAction(walk);
+Cocos-creator  基本api
+
+//逻辑节点
+cc.Node
+
+一.事件系统
+
+在逻辑节点（cc.Node）中，我们添加了一系列全新的事件 API，从逻辑节点可以分发多种事件，也允许监听器向自己注册某种事件。监听器可以是一个简单的回调函数，也可以是回调函数和它的调用者组合，重要的API列表：
+
+1.node.emit(type, detail)：通知所有监听 type 事件的监听器，可以发送一个附加参数。
+2.node.dispatchEvent(event)：发送一个事件给它的监听器，支持冒泡。
+3.node.on(type, callback, target)：持续监听 node 的 type 事件。
+4.node.once(type, callback, target)：监听一次 node 的 type 事件。
+5.node.off(type, callback, target)：取消监听所有 type 事件或取消 type 的某个监听器（用 callback 和 target 指定）。
+
+这样的事件分发方式从集中由 cc.eventManager 分发，变为了拥有事件的节点本身分发自己的事件，可以说是集中式事件系统向离散式事件系统的转变。同时，Cocos Creator 还在节点中内建了鼠标和触摸两种系统事件：
+
+  	枚举对象定义	        对应的事件名
+cc.Node.EventType.TOUCH_START	'touchstart'
+cc.Node.EventType.TOUCH_MOVE	'touchmove'
+cc.Node.EventType.TOUCH_END	'touchend'
+cc.Node.EventType.TOUCH_CANCEL	'touchcancel'
+cc.Node.EventType.MOUSE_DOWN	'mousedown'
+cc.Node.EventType.MOUSE_ENTER	'mouseenter'
+cc.Node.EventType.MOUSE_MOVE	'mousemove'
+cc.Node.EventType.MOUSE_LEAVE	'mouseleave'
+cc.Node.EventType.MOUSE_UP	'mouseup'
+cc.Node.EventType.MOUSE_WHEEL	'mousewheel'

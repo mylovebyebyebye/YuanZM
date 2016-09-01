@@ -1,4 +1,4 @@
-  	//创建精灵
+  //创建精灵
 var role = new cc.Sprite('role.png’);
 	//添加到场景中
 scene.addChild(role);
